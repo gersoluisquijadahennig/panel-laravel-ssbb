@@ -18,9 +18,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function profile()
-    {
-        return view('user.profile');
+    public function index()
+    {   
+        //
     }
 
     /**
@@ -42,9 +42,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+         /*
+        Datos del usuario que ha iniciado sesion
+        */
+        $user = auth()->user();
+        return view('user.show', compact('user'));
     }
 
     /**

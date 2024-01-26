@@ -123,4 +123,34 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     > yes
 
 
+    npm install
+
+    php artisan migrate
+
+git remote add origin URL_DEL_REPOSITORIO_EN_GITHUB
+git commit -m "commit inicial en la rama main"
+
+
+
+## instalacion de Oracle DB driver for Laravel 4|5|6|7|8|9|10 via OCI8
+
+    - composer require yajra/laravel-oci8:^10
+    - composer update
+
+## Al parecer tenemos que instalar el cliente de Oracle vamos a empezar con la version actualizada (NO)
+
+ versión del cliente coincida con la versión de tu servidor de base de datos Oracle. (DETENIDO POR AHORA)
+
+## Vamos a instalar https://laratrust.santigarcor.me/docs/8.x/installation.html
+ agregar al archivo composer.json
+
+"require": {
+    "kkszymanowski/traitor": "^1.0"
+}
+
+composer update
+
+composer require santigarcor/laratrust
+
+
 

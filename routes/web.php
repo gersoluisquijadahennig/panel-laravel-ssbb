@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +23,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/user', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+//Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/show', [UserController::class, 'show'])->name('user.show');
+    // Otras rutas relacionadas con el usuario
+});
