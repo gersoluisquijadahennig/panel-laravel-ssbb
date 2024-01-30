@@ -73,6 +73,7 @@ git commit -m "commit inicial en la rama main"
 
 ## Al parecer tenemos que instalar el cliente de Oracle vamos a empezar con la version actualizada (NO)
 
+ Version 19.21.0.0.0
  versión del cliente coincida con la versión de tu servidor de base de datos Oracle. (DETENIDO POR AHORA)
 
 ## Vamos a instalar https://laratrust.santigarcor.me/docs/8.x/installation.html

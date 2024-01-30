@@ -20,12 +20,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-//Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-
 Route::group(['prefix' => 'user'], function () {
     Route::get('/show', [UserController::class, 'show'])->name('user.show');
     // Otras rutas relacionadas con el usuario
 });
+
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');

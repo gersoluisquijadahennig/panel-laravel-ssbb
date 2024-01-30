@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {   
+    protected $connetion =  'pgslq';
+    protected $connetion2 =  'oracle';
     /**
      * Display a listing of the resource.
      */
@@ -47,8 +52,15 @@ class UserController extends Controller
          /*
         Datos del usuario que ha iniciado sesion
         */
+        $usuariosOracle = DB::connection('oracle')->select('select * from REFCENTRAL.USUARIO');
+
+        //dd($usuariosOracle);
+
         $user = auth()->user();
-        return view('user.show', compact('user'));
+        \Illuminate\Support\Facades\Log::info('Consulta de usuario autenticado: ' . $user);
+
+        //dd($user);
+        return view('user.show', compact('user', 'usuariosOracle'));
     }
 
     /**
