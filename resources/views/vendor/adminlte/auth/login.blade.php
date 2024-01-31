@@ -24,7 +24,7 @@
     <form action="{{ $login_url }}" method="post">
         @csrf
 
-        {{-- usuario field --}}
+        {{-- usuario field 
         <div class="input-group mb-3">
             <input type="text" name="usuario" class="form-control @error('usuario') is-invalid @enderror"
                    value="{{ old('usuario') }}" placeholder=" Ingrese su usuario" autofocus>
@@ -40,15 +40,15 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-        </div>
+        </div>--}}
 
-        {{--<div class="input-group mb-3">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+        <div class="input-group mb-3">
+            <input type="text" name="run" class="form-control"
+                   value="{{ old('email') }}" placeholder="usuario" autofocus>
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
 
@@ -57,11 +57,11 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-        </div>--}}
+        </div>
 
         {{-- Password field --}}
         <div class="input-group mb-3">
-            <input type="password" name="clave" id="clave" class="form-control @error('password') is-invalid @enderror"
+            <input type="password" name="clave"  class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">

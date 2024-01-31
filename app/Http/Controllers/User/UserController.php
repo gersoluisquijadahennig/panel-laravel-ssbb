@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserPanel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -52,15 +53,14 @@ class UserController extends Controller
          /*
         Datos del usuario que ha iniciado sesion
         */
-        $usuariosOracle = DB::connection('oracle')->select('select * from REFCENTRAL.USUARIO');
+        $user = Auth::user();
 
-        //dd($usuariosOracle);
+        $consultaBasePostgres = User::all();
 
-        $user = auth()->user();
-        \Illuminate\Support\Facades\Log::info('Consulta de usuario autenticado: ' . $user);
+        $consultaBaseOracle = UserPanel::where('run','263354516')->get();
 
-        //dd($user);
-        return view('user.show', compact('user', 'usuariosOracle'));
+    
+        return view('user.show',['user'=>$user,'usersPostgres' => $consultaBasePostgres, 'UsersOracle'=>$consultaBaseOracle ]);
     }
 
     /**

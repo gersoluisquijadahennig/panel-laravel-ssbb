@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Attribute;
 use Laratrust\Contracts\LaratrustUser;
 use Laratrust\Traits\HasRolesAndPermissions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,9 +19,7 @@ class UserPanel extends Authenticatable implements LaratrustUser
 
     protected $connection = 'oracle';
 
-    protected $table = 'REFCENTRAL.USUARIO';
-
-    protected $primaryKey = 'usuario';
+    protected $table = 'BIBLIOTECA_VIRTUAL.USUARIO_PANEL';
 
     /**
      * The attributes that are mass assignable.
@@ -27,18 +27,31 @@ class UserPanel extends Authenticatable implements LaratrustUser
      * @var array<int, string>
      */
     protected $fillable = [
-        'USUARIO',
-        'CLAVE',
+        'id',
+        'usuario',
+        'clave',
         'personas_id',
         'perfil_id',
+        'correo_electronico',
         'fecha_ingreso',
         'descripcion',
         'activo',
         'usuario_id_mod',
-        'fecha_mod',
-        'clave_historial'
+        'establecimiento_id',
+        'estab_unid_func_id',
+        'unidad_funcional_origen_id',
+        'proyecto_predeterminado',
+        'alias',
+        'run',
+        'ultimo_acceso',
+        'habilita_depuracion',
+        'fecha_clave',
     ];
 
+    public function getPasswordAttribute()
+    {
+        return $this->attributes['clave'];
+    }
     
     /**
      * The attributes that should be hidden for serialization.
@@ -46,8 +59,20 @@ class UserPanel extends Authenticatable implements LaratrustUser
      * @var array<int, string>
      */
     protected $hidden = [
-        'clave',
+        'password',
         'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        //'email_verified_at' => 'datetime',
+        //'clave' => 'hashed',
+    ];
+
+    
 
 }
