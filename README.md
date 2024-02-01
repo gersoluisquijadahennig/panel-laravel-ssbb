@@ -31,6 +31,7 @@
     - abrimos una terminal, nos dirigimos al directorio pricipal de laravel y ejecutamos:  php artisan key:generate
 
 ## Instalamos AdminLTE v3 el paquete por composer para laravel - Primera vez despues despues simplemente se descarga repo
+## se instala paquete Auth, por defecto de laravel
     
     - composer require jeroennoten/laravel-adminlte
     - php artisan adminlte:install
@@ -78,7 +79,7 @@ git commit -m "commit inicial en la rama main"
     - habilitar las extenciones de php necesarias
     - instalar cliente oracle compatible con la version de BD 11.2
 
-## Al parecer tenemos que instalar el cliente de Oracle vamos a empezar con la version actualizada (NO)
+## Al parecer tenemos que instalar el cliente de Oracle vamos a empezar con la version actualizada 
 
  Version 19.21.0.0.0
  versión del cliente coincida con la versión de tu servidor de base de datos Oracle. 
