@@ -16,7 +16,7 @@
     - laragon por defecto puede crear virtual hosts. por lo que o que se crea el archivo en la carpeta sites-enables, aqui podemos realizar los ajustes para saber donde esta el archivo index.php, si no lo hace por defecto deberia de aputar asi en el proyecto root     
       "C:/laragon/www/panellaravel/public";
 
-## Instala laravel
+## Instala laravel si es un proyecto desde 0
     - no dirigimos al directorio general de laragon para alojar los sitios C:\laragon\www
     - abrimos una terminal y ejecutamos composer create-project laravel/laravel <nombre-app>
     - modificamos el archivo .env modificar los datos para acceso a bases de datos, entre otras cosas
@@ -29,6 +29,14 @@
             DB_USERNAME=gquijadah
             DB_PASSWORD=gquijada561
     - abrimos una terminal, nos dirigimos al directorio pricipal de laravel y ejecutamos:  php artisan key:generate
+
+## clonar el repositorio desde Git
+
+    - instalar Git en computador
+    - nos dirigimos al directorio www de laragon creamos un directorio con el nombre del proyecto
+    - abrir una terminar es esta ubicacion y ejecutar: git clone https://github.com/gersoluisquijadahennig/panel-laravel-ssbb.git
+    - en la mis terminar ejcutar: composer install
+    - luego:  npm install && npm rum dev 
 
 ## Instalamos AdminLTE v3 el paquete por composer para laravel - Primera vez despues despues simplemente se descarga repo
 ## se instala paquete Auth, por defecto de laravel
