@@ -186,7 +186,4 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'port' => env('APP_PORT', 81),
-
-
 ];

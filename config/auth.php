@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\User\UserOracleController;
+
 return [
 
     /*
@@ -39,6 +41,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            
         ],
     ],
 
@@ -63,6 +66,8 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserPanel::class,
+            'controller' => UserOracleController::class
+            
         ],
 
         // 'users' => [
