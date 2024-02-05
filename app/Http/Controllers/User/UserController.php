@@ -48,16 +48,17 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($show)
     {
          /*
         Datos del usuario que ha iniciado sesion
         */
-        $user = Auth::user();
+        
+        $user = User::where('id',$show)->firstorFail();
 
         $consultaBasePostgres = User::all();
 
-        $consultaBaseOracle = UserPanel::where('run','263354516')->get();
+        $consultaBaseOracle = UserPanel::where('run',$user->run)->get();
 
     
         return view('user.show',['user'=>$user,'usersPostgres' => $consultaBasePostgres, 'UsersOracle'=>$consultaBaseOracle ]);

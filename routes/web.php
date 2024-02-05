@@ -22,12 +22,12 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::group(['prefix' => 'user'], function () {
-    Route::get('/show', [UserController::class, 'show'])->name('user.show');
+    Route::get('/show/{show?}', [UserController::class, 'show'])->name('user.show');
     Route::get('/index',[UserPanelController::class, 'index'])->name('user.index');
     Route::get('/edit/{edit?}', [UserPanelController::class, 'edit'])->name('user.edit');
     // Otras rutas relacionadas con el usuario
-});
+})->middleware('api.auth');
 
 Route::get('/home', function() {
     return view('home');
-})->name('home')->middleware('auth');
+})->name('home')->middleware('api.auth');

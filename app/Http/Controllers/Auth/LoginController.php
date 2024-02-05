@@ -7,6 +7,7 @@ use App\Models\UserPanel;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 
 class LoginController extends Controller
@@ -43,30 +44,27 @@ class LoginController extends Controller
     
     public function login(Request $request)
     {
+
+        $response = Http::post('http://apiloginlaravel.test/api/login', 
+        [
+            'run' => $request->input('run'),
+            'password' => $request->input('password'),
+        ]);
+
+        //dd($response);
         
-        $credentials = $this->credentials($request);
 
-        $user = UserPanel::where('run',$credentials['run'])->first();
-
-        if($user->password === $credentials['clave']){
-
-            Auth::login($user);
-            $request->session()->regenerate();
-
-            if ($request->hasSession()) {
-                $request->session()->put('auth.password_confirmed_at', time());
-                $request->session()->put('auth.dato1', 'dato1');
-                $request->session()->put('auth.dato2', 'dato2');
-                $request->session()->put('auth.dato3', 'dato3');
-            }
-
-            return $this->sendLoginResponse($request);
-            }
-
+        if ($response->successful()) {
+                               
+            return redirect('/home');
+        
+        }else{
             // En caso de que las credenciales no coincidan
             $this->incrementLoginAttempts($request);
-
             return $this->sendFailedLoginResponse($request);
+        }
+
+            
     }
     public function username()
     {
