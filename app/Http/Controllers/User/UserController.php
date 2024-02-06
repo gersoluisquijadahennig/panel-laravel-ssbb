@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserPanel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {   
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('api.auth');
     }
 
     /**
@@ -26,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {   
-        //
+      return response()->json(User::all()); 
     }
 
     /**
@@ -34,7 +35,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //  
+
+
     }
 
     /**
@@ -86,5 +89,10 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        return view('adminlte::auth.login');
     }
 }

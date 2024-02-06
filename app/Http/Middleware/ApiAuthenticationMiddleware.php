@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiAuthenticationMiddleware
@@ -15,13 +16,27 @@ class ApiAuthenticationMiddleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        dd($request->cookie('access_token'));
-        if($token = $request->cookie('access_token')){
+       
+        $authorizationHeader = $request->cookie('Authorization');
+        $user = $request->cookie('X-User-ID');
 
-            $request->headers->set('Authorization', 'Bearer '.$token);
-            dd( $request->headers->set('Authorization', 'Bearer '.$token));
+        $response = Http::withHeaders([
+            'Authorization' => $authorizationHeader,
+            'X-User-ID' => $user,
+        ])->post('http://apiloginlaravel.test/api/loginuser');
+
+        if ($response->successful()) {
+            return $next($request);
         }
+        else{
+            return redirect('/login');
+        }
+        
 
-        return $next($request);
+    }
+
+    protected function redirectTo(Request $request): ?string
+    {
+        return $request->expectsJson() ? null : route('login');
     }
 }

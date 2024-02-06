@@ -103,7 +103,7 @@
 
         {{-- Password field --}}
         <div class="input-group mb-3">
-            <input type="password" name="password"  class="form-control @error('password') is-invalid @enderror"
+            <input type="password" name="clave"  class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">

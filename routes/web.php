@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\UserPanelController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-Route::group(['prefix' => 'user'], function () {
-    Route::get('/show/{show?}', [UserController::class, 'show'])->name('user.show');
-    Route::get('/index',[UserPanelController::class, 'index'])->name('user.index');
-    Route::get('/edit/{edit?}', [UserPanelController::class, 'edit'])->name('user.edit');
-    // Otras rutas relacionadas con el usuario
-})->middleware('api.auth');
+    Route::get('login', [UserController::class, 'login'])->name('login');
+    Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::get('/home', function() {
-    return view('home');
+        return view('home');
 })->name('home')->middleware('api.auth');

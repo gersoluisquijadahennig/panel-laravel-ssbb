@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cookie;
+
 
 
 class LoginController extends Controller
@@ -41,30 +43,32 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    
+
     public function login(Request $request)
     {
-
-        $response = Http::post('http://apiloginlaravel.test/api/login', 
-        [
-            'run' => $request->input('run'),
-            'password' => $request->input('password'),
-        ]);
-
-        //dd($response);
         
-
+        $response = Http::post(
+            'http://apiloginlaravel.test/api/login',
+            [
+                'run' => $request->input('run'),
+                'password' => $request->input('password'),
+            ]
+        );
         if ($response->successful()) {
-                               
-            return redirect('/home');
-        
-        }else{
+            $authorizationHeader = $response->header('Authorization');
+            $user_id=$response->header('X-User-ID');
+            //dd($authorizationHeader);
+            //$token = $response->json()['access_token'];
+            //session(['token_en_sesion_login' => $token]);
+            return redirect('/home')->withCookies([
+                Cookie('Authorization', $authorizationHeader, 60 * 24 * 30),
+                Cookie('X-User-ID', $user_id, 60 * 24 * 30),
+            ]);
+        } else {
             // En caso de que las credenciales no coincidan
             $this->incrementLoginAttempts($request);
             return $this->sendFailedLoginResponse($request);
         }
-
-            
     }
     public function username()
     {
@@ -72,13 +76,13 @@ class LoginController extends Controller
     }
 
     public function passwordFieldname()
-    {   
+    {
         return 'clave';
     }
 
     protected function validateLogin(Request $request)
     {
-       // dd($this->getClaveAttribute($request));
+        // dd($this->getClaveAttribute($request));
 
         $request->validate([
             $this->username() => 'required|string',
@@ -94,7 +98,6 @@ class LoginController extends Controller
 
         //dd($credentials);
         return $credentials;
-
     }
 
     public function getClaveAttribute(Request $request)
@@ -102,5 +105,5 @@ class LoginController extends Controller
         $pass = $request->only($this->passwordFieldname());
 
         return md5($pass['clave']);
-    }    
+    }
 }
