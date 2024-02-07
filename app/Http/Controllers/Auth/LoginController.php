@@ -46,7 +46,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        
+        //dd($request->only('run', 'password'));
         $response = Http::post(
             'http://apiloginlaravel.test/api/login',
             [
@@ -54,6 +54,9 @@ class LoginController extends Controller
                 'password' => $request->input('password'),
             ]
         );
+
+        //dd($response->json());
+        
         if ($response->successful()) {
             $authorizationHeader = $response->header('Authorization');
             $user_id=$response->header('X-User-ID');

@@ -2,7 +2,6 @@
 
 @section('adminlte_css_pre')
     <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('http://10.8.117.112/panel/portal/lib/css/estilo.css') }}">
 @stop
 
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
@@ -20,48 +19,7 @@
 @endif
 
 @section('auth_header', __('adminlte::adminlte.login_message'))
-<form id="form_acceso" action="" method="post" onsubmit="return enviar();" class="login">
-    <input type="hidden" name="Proyectos" id="Proyectos" value="">
-    <input type="hidden" name="resAncho" id="resAncho" value="">
-    <input type="hidden" name="exito" id="exito" value="">
-    <input type="hidden" name="nombres" id="nombres" value="">
-    <input type="hidden" name="server" id="server" value="10.8.117.112">
-    <input type="hidden" name="ip" id="ip" value="10.8.117.29">
 
-
-    <p class="title" align="center" style="color:#165587">Panel de Documentos</p>
-    <table class="tabla_login" border="0">
-        <tbody><tr id="tr_principal">
-            <td style="margin-top:0;">
-                <div align="center">
-                    <img src="http://10.8.117.112/panel/portal/lib/img/logo_ssbb.jpg" class="logo_login">
-                </div>
-            </td><td>
-                <!-- RUT USUARIO -->
-                <center style="margin-top: -30px"><img src="panel/portal/lib/img/logo_int.png" class="logo_movil"></center>
-                <input type="text" name="usuario" id="usuario" class="txt_login" autocomplete="off" placeholder="Usuario" style="width:240px;" autofocus="" maxlength="9" required="">
-
-                <!-- CLAVE USUARIO -->
-                <input type="password" name="clave" id="clave" class="txt_login" placeholder="Contraseña" style="width:240px;" required="">
-
-                    <a href="#" id="olvida_clave">¿Olvidaste tu contraseña?</a>
-
-                <!-- SELECT PROYECTO -->
-                   <div class="field" id="div_proyectos">
-                    <select id="sProyectos" name="sProyectos" onkeypress="enviar_por_select(event)">
-                                                                  <option value="5000|/panel/portal/lib/clases/psLogin.php ">
-                                PANEL										</option>
-                                                              </select>
-                  </div>
-            </td>
-        </tr>
-    </tbody></table>
-
-    <button id="bt_ok" name="bt_ok" class="btn_ingresar">
-        <i class="spinner"></i>
-        <span class="state">Acceder</span>
-    </button>
-</form>
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
         @csrf
@@ -103,7 +61,7 @@
 
         {{-- Password field --}}
         <div class="input-group mb-3">
-            <input type="password" name="clave"  class="form-control @error('password') is-invalid @enderror"
+            <input type="password" name="password"  class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">
